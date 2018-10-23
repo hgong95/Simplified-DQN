@@ -7,14 +7,11 @@ Created on Sat Oct 20 15:38:44 2018
 """
 
 import numpy as np
-
-
 import pandas as pd
 import tensorflow as tf
 import gym
 import brain
 import kernel
-from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 
 
@@ -31,9 +28,6 @@ import matplotlib.pyplot as plt
 
 FEATURE_NAMES = ['0Cart Position', '1Cart Velocity', '2Pole Angle', '3Pole Velocity At Tip']
 
-
-
-
 env = gym.make('CartPole-v0')
 env.reset()
 
@@ -46,27 +40,6 @@ worker.work(sess, plot_learning_curve=True)
 
 worker.test(sess)
 
-
-
-#K = KernelGaussian(states, next_states).K2
-#
-#u, s, vh = np.linalg.svd(K)
-##k = 10
-##plt.plot(range(k), s[:k])
-#
-#r = 5
-#kmeans = KMeans(n_clusters = r)
-#kmeans.fit(vh.T[:,:r])
-#
-#labels = kmeans.labels_
-#
-#i = 2
-#j = 3
-#
-#plt.scatter(states[:,i], states[:,j],
-#            s=5, c = labels, cmap=plt.cm.gist_rainbow)
-#plt.xlabel(FEATURE_NAMES[i])
-#plt.ylabel(FEATURE_NAMES[j])
 
 
 
