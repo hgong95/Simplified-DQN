@@ -22,7 +22,6 @@ def forward_net(inpt):
         # out = tf.nn.dropout(out, keep_prob = 0.7)
     return out
 
-
 def huber_loss(x, delta=1.0):
     """Reference: https://en.wikipedia.org/wiki/Huber_loss"""
     return tf.where(
@@ -30,7 +29,6 @@ def huber_loss(x, delta=1.0):
       tf.square(x) * 0.5,  # if satisfied use this
       delta * (tf.abs(x) - 0.5 * delta)  # else use this
     )
-    
     
 def plot_learning_curve(returns, freq):    
     if len(returns) == 0:
@@ -43,8 +41,7 @@ def plot_learning_curve(returns, freq):
     
     plt.plot(_x, _y)    
     plt.show()
-
-        
+      
 def gaussian_kernel(S, T):
     ''' Compute the gaussian kernel matrix between S and T.
         S, T.shape = (n_samples, n_features)
@@ -66,7 +63,6 @@ def gaussian_kernel(S, T):
     exp_term = Si_Si_t - 2*Si_Tj_t + Tj_Tj_t
     
     K = 1/np.power(2*np.pi, p/2) * np.exp(-0.5 * exp_term)
-    
     return K
     
 def discrete_kernel(S, T, grid_shape = [10, 10, 10, 10]):
@@ -83,7 +79,6 @@ def discrete_kernel(S, T, grid_shape = [10, 10, 10, 10]):
     for i in range(n):
         temp = S[i] - T <= thrshhlds
         K.append(np.prod(temp, axis=1))
-        
     return np.array(K)    
 
       
