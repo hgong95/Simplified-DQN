@@ -69,8 +69,7 @@ class DQN(object):
         eval_params = tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES, scope = 'eval_net')
         target_params = tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES, scope = 'target_net')
         self.target_replace_op = [tf.assign(t, e) for t, e in zip(target_params, eval_params)]
-        
-        
+          
     def _build_net(self):    
         self.s = tf.placeholder(tf.float32, 
                                 shape = [None, self.n_features],
@@ -126,10 +125,8 @@ class GeneralWorker(object):
         self.episode_mean_values = []
         self.local_timesteps = 0
 
-        
-    
+
 class WorkerDQN(GeneralWorker):
-    
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         
@@ -140,7 +137,6 @@ class WorkerDQN(GeneralWorker):
         self.n_exploration_steps = 10000
         self.target_net_update_freq = 2000
         self.plot_learning_curve_freq = 50
-        
         
         self.exploration_eps = np.linspace(self.epsilon_start, 
                                            self.epsilon_final, 
@@ -154,15 +150,13 @@ class WorkerDQN(GeneralWorker):
         self.replay_memory = ReplayMemory(self.replay_memory_capacity)
 
     def reset_network(self, sess):
-    
         sess.run(self.dqn.initialize_op)
         sess.run(self.dqn.target_replace_op)
 
         self.learning_step_counter = 0
         self.final_returns = []
         
-    def work(self, sess, n_episodes = 2000, plot_learning_curve = False):
-                
+    def work(self, sess, n_episodes = 2000, plot_learning_curve = False):      
         try: 
             self.final_returns
         except AttributeError:
